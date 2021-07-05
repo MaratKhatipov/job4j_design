@@ -24,9 +24,8 @@ public class SimpleArray<T> implements Iterable<T> {
 	set заменяет указанным элементом (model) элемент, находящийся по индексу index;
 	 */
 	public void set(int index, T model) {
-		if (Objects.checkIndex(index, position) == index) {
+		Objects.checkIndex(index, position);
 			array[index] = model;
-		}
 	}
 	/**
 	remove(int index) - удаляет элемент по указанному индексу,
@@ -34,19 +33,17 @@ public class SimpleArray<T> implements Iterable<T> {
 	(в середине массива не должно быть пустых ячеек);
 	 */
 	public void remove(int index) {
-		if (Objects.checkIndex(index, position) == index) {
+		Objects.checkIndex(index, position);
 			System.arraycopy(array, index + 1, array, index, array.length - index - 1);
 			position--;
 		}
-	}
 	/**
 	get(int index) - возвращает элемент, расположенный по указанному индексу;
 	 */
 	public T get(int index) {
 		T getResult = null;
-		if (Objects.checkIndex(index, position) == index) {
-			getResult = (T) array[index];
-		}
+		Objects.checkIndex(index, position);
+		getResult = (T) array[index];
 		return getResult;
 	}
 
@@ -66,9 +63,6 @@ public class SimpleArray<T> implements Iterable<T> {
 				T rsl = null;
 				if (!hasNext()) {
 					throw new NoSuchElementException();
-				}
-				while (rsl == null) {
-					rsl = (T) array[position++];
 				}
 				return rsl;
 			}
