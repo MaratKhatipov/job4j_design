@@ -36,6 +36,7 @@ public class SimpleArray<T> implements Iterable<T> {
 		Objects.checkIndex(index, position);
 			System.arraycopy(array, index + 1, array, index, array.length - index - 1);
 			position--;
+			array[array.length - 1] = null;
 		}
 	/**
 	get(int index) - возвращает элемент, расположенный по указанному индексу;
