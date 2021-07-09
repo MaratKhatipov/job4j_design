@@ -29,9 +29,6 @@ public class SimpleLinkedList<E> implements List<E> {
 	public E get(int index) {
 		Objects.checkIndex(index, size);
 		Node<E> getElement = head;
-		if (index < 0 || index > size) {
-			throw new IndexOutOfBoundsException();
-		}
 		for (int i = 0; i < index; i++) {
 			getElement = getElement.next;
 
@@ -62,7 +59,14 @@ public class SimpleLinkedList<E> implements List<E> {
 				if (expectedModCount != modCount) {
 					throw new ConcurrentModificationException();
 				}
-				return get(position++);
+
+				if (position == 0) {
+					tail = head;
+				}
+				Node<E> temp = tail;
+				tail = temp.next;
+				position++;
+				return temp.item;
 			}
 		};
 	}
