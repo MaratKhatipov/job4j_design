@@ -43,4 +43,12 @@ public class ForwardLinkedReversTest {
 		singleList.addToEnd(1);
 		assertFalse(singleList.revert());
 	}
+
+	@Test
+	public void whenSize2ThenReturnTrue() {
+		ForwardLinkedRevers<Integer> singleList = new ForwardLinkedRevers<>();
+		singleList.addToEnd(1);
+		singleList.addToEnd(2);
+		assertTrue(singleList.revert());
+	}
 }
