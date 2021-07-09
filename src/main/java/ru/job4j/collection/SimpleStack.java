@@ -1,11 +1,8 @@
 package ru.job4j.collection;
 
-import java.util.Stack;
-
 public class SimpleStack<T> {
 	private ForwardLinked<T> linked = new ForwardLinked<>();
 	private int size;
-	Stack<T> exampleStack = new Stack<>();
 /*
 Метод pop() - должен возвращать значение и удалять его из коллекции.
  */
