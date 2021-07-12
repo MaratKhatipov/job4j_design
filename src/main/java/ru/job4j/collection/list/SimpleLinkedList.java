@@ -33,7 +33,7 @@ public class SimpleLinkedList<E> implements List<E> {
 			getElement = getElement.next;
 
 		}
-		return getElement.item;
+		return getElement.element;
 	}
 
 	public int linkedListSize() {
@@ -43,6 +43,7 @@ public class SimpleLinkedList<E> implements List<E> {
 	@Override
 	public Iterator<E> iterator() {
 		return new Iterator<E>() {
+			Node<E> temp;
 			private int position;
 			private int expectedModCount = modCount;
 
@@ -63,21 +64,21 @@ public class SimpleLinkedList<E> implements List<E> {
 				if (position == 0) {
 					tail = head;
 				}
-				Node<E> temp = tail;
-				tail = temp.next;
+				temp = tail;
+				tail = tail.next;
 				position++;
-				return temp.item;
+				return temp.element;
 			}
 		};
 	}
 
 	private static class Node<E> {
-		E item;
+		E element;
 		Node<E> next;
 		Node<E> prev;
 
 		Node(Node<E> prev, E element, Node<E> next) {
-			this.item = element;
+			this.element = element;
 			this.next = next;
 			this.prev = prev;
 		}
