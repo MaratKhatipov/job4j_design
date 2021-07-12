@@ -7,21 +7,18 @@ public class SimpleQueue<T> {
 	private int outElementCount = 0;
 
 	public T poll() {
-		while (outElementCount <= inElementCount) {
-			out.push(in.pop());
-			inElementCount--;
-			outElementCount++;
+		if (outElementCount == 0) {
+			while (inElementCount > 0)  {
+				out.push(in.pop());
+				inElementCount--;
+				outElementCount++;
+			}
 		}
 		outElementCount--;
 		return out.pop();
 	}
 
 	public void push(T value) {
-		while (outElementCount > inElementCount) {
-			in.push(out.pop());
-			inElementCount++;
-			outElementCount--;
-		}
 		in.push(value);
 		inElementCount++;
 	}
