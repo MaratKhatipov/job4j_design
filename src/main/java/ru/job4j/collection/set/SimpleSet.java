@@ -22,14 +22,17 @@ public class SimpleSet<T> implements Set<T> {
 
 	@Override
 	public boolean contains(T value) {
+		Iterator<T> it = set.iterator();
 		/*
 		пройтись по set пока есть элементы
 		и если по пути встретился элемент value
 		вернуть true!
 		 */
-		while (set.iterator().hasNext()) {
-			if (Objects.equals(set.iterator().next(), value)) {
-				return true;
+		while (it.hasNext()) {
+			for (T t :set) {
+				if (Objects.equals(t, value)) {
+					return true;
+				}
 			}
 		}
 		return false;
