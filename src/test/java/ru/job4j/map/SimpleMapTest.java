@@ -22,6 +22,13 @@ public class SimpleMapTest {
 	}
 
 	@Test
+	public void whenNotPlace() {
+		SimpleMap testMap = new SimpleMap();
+		assertTrue(testMap.put("one", 1));
+		assertFalse(testMap.put("четыре", 4));
+	}
+
+	@Test
 	public void whenPutMoreElementsThenCapacity() {
 		SimpleMap testMap = new SimpleMap();
 		testMap.put("one", 1);

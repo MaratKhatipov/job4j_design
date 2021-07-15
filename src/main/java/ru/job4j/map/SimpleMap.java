@@ -15,11 +15,12 @@ public class SimpleMap<K, V> implements Map<K, V> {
 	@Override
 	public boolean put(K key, V value) {
 		int h = hash(key);
+		int index = indexFor(h);
 		if (count >= capacity * LOAD_FACTOR) {
 			expand();
 		} else {
-			if (table[h] == null) {
-				table[h] = new MapEntry<>(key, value);
+			if (table[index] == null) {
+				table[index] = new MapEntry<>(key, value);
 				count++;
 				modCount++;
 				return true;
@@ -41,7 +42,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
 	}
 
 	private int indexFor(int hash) {
-		return hash % capacity;
+		return (capacity - 1) & hash;
 	}
 
 	private void expand() {
