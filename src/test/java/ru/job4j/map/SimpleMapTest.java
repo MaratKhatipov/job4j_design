@@ -29,21 +29,6 @@ public class SimpleMapTest {
 	}
 
 	@Test
-	public void whenPutMoreElementsThenCapacity() {
-		SimpleMap testMap = new SimpleMap();
-		testMap.put("one", 1);
-		testMap.put("two", 2);
-		testMap.put("три", 3);
-		testMap.put("четыре", 4);
-		testMap.put("пять", 5);
-		testMap.put("шесть", 6);
-		testMap.put("семь", 7);
-		testMap.put("восемь", 8);
-		testMap.put("проверка", 111);
-		assertThat(16, is(testMap.size()));
-	}
-
-	@Test
 	public void whenGetReturnValue() {
 		SimpleMap testMap = new SimpleMap();
 		testMap.put("one", 1);
@@ -55,6 +40,7 @@ public class SimpleMapTest {
 	public void whenGetReturnNull() {
 		SimpleMap testMap = new SimpleMap();
 		testMap.put("one", 1);
+		testMap.put("четыре", 4);
 		assertThat(null, is(testMap.get("two")));
 	}
 

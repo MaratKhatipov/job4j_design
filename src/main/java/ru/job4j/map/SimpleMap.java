@@ -1,6 +1,5 @@
 package ru.job4j.map;
 
-import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -14,12 +13,12 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
 	@Override
 	public boolean put(K key, V value) {
-		int h = hash(key);
-		int index = indexFor(h);
 		if (count >= capacity * LOAD_FACTOR) {
 			expand();
-		} else {
-			if (table[index] == null) {
+		}
+		int h = hash(key);
+		int index = indexFor(h);
+		if (table[index] == null) {
 				table[index] = new MapEntry<>(key, value);
 				count++;
 				modCount++;
@@ -27,7 +26,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
 			} else if (table[h] != null) {
 				return false;
 			}
-		}
 		return false;
 	}
 
@@ -42,31 +40,47 @@ public class SimpleMap<K, V> implements Map<K, V> {
 	}
 
 	private int indexFor(int hash) {
-		return (capacity - 1) & hash;
+		return (capacity - 1) & (hash ^ (hash >>> 16));
 	}
 
 	private void expand() {
-		table = Arrays.copyOf(table, capacity * 2);
 		capacity *= 2;
+		MapEntry<K, V>[] tmpTable = table;
+		table = new MapEntry[capacity];
+		for (MapEntry<K, V>  mapEntry : tmpTable) {
+			if (mapEntry == null) {
+				continue;
+			}
+			put(mapEntry.key, mapEntry.value);
+		}
+		modCount++;
+
+
 	}
 
 	@Override
 	public V get(K key) {
 		int h = hash(key);
-		if (table[h] != null) {
-			return table[h].value;
-		}
-		return null;
+		int index = indexFor(h);
+		MapEntry res = table[index];
+		return res != null ? (V) res.value : null;
 	}
+
 	public int size() {
 		return capacity;
 	}
 
 	@Override
 	public boolean remove(K key) {
-		int h = hash(key);
-		if (table[h] != null) {
-			table[h] = null;
+		if (key == null) {
+			return false;
+		}
+		int index = indexFor(hash(key));
+		if (table[index] == null) {
+			return false;
+		}
+		if (table[index].key == null || table[index].key.equals(key)) {
+			table[index] = null;
 			count--;
 			modCount++;
 			return true;
@@ -80,7 +94,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
 			private final int size = count;
 			private final MapEntry<K, V>[] tempTable = table;
 			private final int expectedModCount = modCount;
-			private int point = 0;
+			private int point = -1;
 			private int extracted = 0;
 
 			@Override
@@ -105,6 +119,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
 			}
 		};
 	}
+
 
 	private static class MapEntry<K, V> {
 		K key;
