@@ -51,11 +51,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
 			if (mapEntry == null) {
 				continue;
 			}
+			count = 0;
 			put(mapEntry.key, mapEntry.value);
 		}
 		modCount++;
-
-
 	}
 
 	@Override
@@ -63,7 +62,14 @@ public class SimpleMap<K, V> implements Map<K, V> {
 		int h = hash(key);
 		int index = indexFor(h);
 		MapEntry res = table[index];
-		return res != null ? (V) res.value : null;
+
+		if (table[index] == null) {
+			return null;
+		}
+		if (table[index].key.equals(key)) {
+			return table[index].getValue();
+		}
+		return null;
 	}
 
 	public int size() {
@@ -79,7 +85,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
 		if (table[index] == null) {
 			return false;
 		}
-		if (table[index].key == null || table[index].key.equals(key)) {
+		if (table[index].key.equals(key)) {
 			table[index] = null;
 			count--;
 			modCount++;
@@ -120,15 +126,21 @@ public class SimpleMap<K, V> implements Map<K, V> {
 		};
 	}
 
-
 	private static class MapEntry<K, V> {
 		K key;
 		V value;
+
+		public K getKey() {
+			return key;
+		}
+
+		public V getValue() {
+			return value;
+		}
 
 		public MapEntry(K key, V value) {
 			this.key = key;
 			this.value = value;
 		}
-
 	}
 }
