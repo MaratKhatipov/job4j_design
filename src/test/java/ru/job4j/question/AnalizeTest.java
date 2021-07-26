@@ -74,4 +74,19 @@ public class AnalizeTest {
 		);
 	}
 
+	@Test
+	public void whenThreeDeleted() {
+		User u1 = new User(1, "A");
+		User u2 = new User(2, "B");
+		User u3 = new User(3, "C");
+		User u4 = new User(4, "D");
+		User u5 = new User(5, "E");
+		Set<User> previous = Set.of(u1, u2, u3, u4, u5);
+		Set<User> current = Set.of(u1, u5);
+		assertThat(
+				Analize.diff(previous, current),
+				is(new Info(0, 0, 3))
+		);
+	}
+
 }
