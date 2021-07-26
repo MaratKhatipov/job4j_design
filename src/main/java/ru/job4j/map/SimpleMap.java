@@ -47,11 +47,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
 		capacity *= 2;
 		MapEntry<K, V>[] tmpTable = table;
 		table = new MapEntry[capacity];
+		count = 0;
 		for (MapEntry<K, V>  mapEntry : tmpTable) {
 			if (mapEntry == null) {
 				continue;
 			}
-			count = 0;
 			put(mapEntry.key, mapEntry.value);
 		}
 		modCount++;
