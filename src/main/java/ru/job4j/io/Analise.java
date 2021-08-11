@@ -21,6 +21,9 @@ public class Analise {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		record(target);
+	}
+	public void record(String target) {
 		try (BufferedWriter out = new BufferedWriter(new FileWriter(target))) {
 			out.write(sb.toString());
 		} catch (IOException e) {
