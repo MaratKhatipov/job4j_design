@@ -92,8 +92,8 @@ public class ConsoleChat {
 	}
 
 	public static void main(String[] args) {
-		ConsoleChat cc = new ConsoleChat("D:\\projects\\job4j_design\\src\\data\\chat_log.log",
-				"D:\\projects\\job4j_design\\src\\data\\consoleChatPhrase.txt");
+		ConsoleChat cc = new ConsoleChat("D:/projects/job4j_design/src/data/chat_log.log",
+				"D:/projects/job4j_design/src/data/consoleChatPhrase.txt");
 		cc.run();
 	}
 }
