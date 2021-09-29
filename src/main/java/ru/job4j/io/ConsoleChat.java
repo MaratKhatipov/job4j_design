@@ -3,6 +3,7 @@ package ru.job4j.io;
 import org.w3c.dom.ls.LSOutput;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -92,8 +93,10 @@ public class ConsoleChat {
 	}
 
 	public static void main(String[] args) {
-		ConsoleChat cc = new ConsoleChat("D:/projects/job4j_design/src/data/chat_log.log",
-				"D:/projects/job4j_design/src/data/consoleChatPhrase.txt");
+	ConsoleChat cc = new ConsoleChat(
+			"./data/chat_log.log",
+			"./data/consoleChatPhrase.txt"
+	);
 		cc.run();
 	}
 }
