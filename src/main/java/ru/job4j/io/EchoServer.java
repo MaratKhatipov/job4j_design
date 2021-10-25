@@ -21,6 +21,7 @@ public class EchoServer {
 							out.write("Работа сервера завершена".getBytes());
 							System.out.println("Сервер остановлен");
 							serverState = true;
+
 						}
 					}
 					out.flush();
