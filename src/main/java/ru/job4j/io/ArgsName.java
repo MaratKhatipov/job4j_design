@@ -23,7 +23,6 @@ public class ArgsName {
 						"Error! use the argument format KEY = VALUE"
 				);
 			}
-			//
 			keyValue = tmpArg.split("=");
 			String tmpKey = keyValue[0].substring(1);
 			String tmpValue = keyValue[1];

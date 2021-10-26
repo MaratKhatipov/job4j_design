@@ -8,7 +8,7 @@ import java.util.Objects;
 public class MyArrayList<T> implements Iterable<T> {
 
 	private Object[] container;
-	private int capacity = 10; // ёмкость массива по умолчанию
+	private int capacity = 10;
 	private int arrSize;
 	private int modCount = 0;
 

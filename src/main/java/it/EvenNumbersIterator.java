@@ -19,7 +19,6 @@ public class EvenNumbersIterator implements Iterator {
 	public EvenNumbersIterator(int[] data) {
 		this.data = data;
 	}
-// for example {1, 2, 3, 4, 5, 6, 7}
 
 	@Override
 	public boolean hasNext() {

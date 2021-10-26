@@ -20,8 +20,7 @@ public class Search {
 		if (args.length < 2) {
 			throw new IllegalArgumentException("File extension is null");
 		}
-// в Edit configuration -> Program arguments ->
-// -> указать D:\projects\job4j_design - это args[0] java - args[1]
+
 		Path start = Paths.get(args[0]);
 		search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
 	}
