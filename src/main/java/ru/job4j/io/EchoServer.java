@@ -19,6 +19,7 @@ public class EchoServer {
 						System.out.println(str);
 						if (str.contains("Bye")) {
 							out.write("Работа сервера завершена".getBytes());
+							System.out.println("Сервер остановлен");
 							serverState = true;
 
 						}
