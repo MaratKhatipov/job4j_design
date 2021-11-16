@@ -9,10 +9,19 @@ public class UsageLog4j {
 	private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
 	public static void main(String[] args) {
-		LOG.trace("trace message");
-		LOG.debug("debug message");
-		LOG.info("info message");
-		LOG.warn("warn message");
-		LOG.error("error message");
+		byte byteNum = 0;
+		short shortNum = 1;
+		int intNum = 2;
+		long longNum = 3L;
+		char character = 'A';
+		boolean booleanType = false;
+		double doubleNum = 4.1;
+		float floatNum = 5.2f;
+
+		LOG.debug("Values of 8 primitive types - \n"
+				+ "byteNum : {} \nshortNum : {} \nintNum : {} \nlongNum : {} "
+				+ "\ncharacter : {} \nbooleanType : {} \ndoubleNum : {} \nfloatNum : {}",
+				byteNum, shortNum, intNum, longNum,
+				character, booleanType, doubleNum, floatNum);
 	}
 }
