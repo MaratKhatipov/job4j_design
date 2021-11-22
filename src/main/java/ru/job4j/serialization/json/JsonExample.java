@@ -1,9 +1,8 @@
 package ru.job4j.serialization.json;
 
-import javax.xml.bind.annotation.*;
 import java.util.Arrays;
 
-)
+
 public class JsonExample {
 
 	private boolean permission;
@@ -20,6 +19,26 @@ public class JsonExample {
 		this.somethingNumb = somethingNumb;
 	}
 
+	public boolean isPermission() {
+		return permission;
+	}
+
+	public int getNumb() {
+		return numb;
+	}
+
+	public String getSomething() {
+		return something;
+	}
+
+	public NestedObject getNestedObject() {
+		return nestedObject;
+	}
+
+	public int[] getSomethingNumb() {
+		return somethingNumb;
+	}
+
 	@Override
 	public String toString() {
 		return "JsonExample{"
@@ -31,7 +50,4 @@ public class JsonExample {
 				+ '}';
 	}
 
-	public static void main(String[] args) {
-
-	}
 }
