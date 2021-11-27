@@ -5,6 +5,7 @@ import ru.job4j.io.Search;
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class SearchFiles {
 
@@ -22,13 +23,18 @@ public class SearchFiles {
 	}
 
 	public void search() {
+		Pattern pattern;
 		try {
 			Path start = Paths.get(String.valueOf(directory));
-			if (typeSearch.contains("name")) {
-				list = Search.search(start, p -> p.toFile().getPath().contains(searchFile));
+			if (typeSearch.equals("name")) {
+				list = Search.search(start, p -> p.toFile().getName().equals(searchFile));
 			} else if (typeSearch.equals("mask")) {
 				searchFile = searchMask();
-				list = Search.search(start, p -> p.toFile().getPath().contains(searchFile));
+				pattern = Pattern.compile(searchFile);
+				list = Search.search(start, p -> p.toFile().getName().matches(pattern.toString()));
+			} else if (typeSearch.equals("regex")) {
+				pattern = Pattern.compile(searchFile);
+				list = Search.search(start, p -> p.toFile().getName().matches(pattern.toString()));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,9 +42,9 @@ public class SearchFiles {
 	}
 
 	private String searchMask() {
-		searchFile.replaceAll("\\*", ".*");
-		searchFile.replaceAll("\\?", "\\w");
-		return searchFile;
+		String mask = searchFile.replaceAll("\\*", ".\\*");
+		mask = mask.replaceAll("\\?", ".\\?");
+		return mask;
 	}
 
 	public void save() {
@@ -53,12 +59,7 @@ public class SearchFiles {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Аргументы: \n"
-				+ "-d=D:\\projects\\job4j_design \n"
-				+ "-n=java \n"
-				+ "-t=mask \n"
-				+ "-o=D:\\projects\\job4j_design\\src\\main\\resources\\1.txt"
-		);
+
 		Validate validate = new Validate(args);
 		SearchFiles searchFiles = new SearchFiles(
 				validate.getDirectory(), validate.getSearchFile(),
