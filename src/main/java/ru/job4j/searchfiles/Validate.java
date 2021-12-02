@@ -8,8 +8,6 @@ package ru.job4j.searchfiles;
 -o - результат записать в файл.
 * */
 
-import ru.job4j.io.ArgsName;
-
 public class Validate {
 
 	private final String directory;
@@ -19,7 +17,7 @@ public class Validate {
 
 	public Validate(String[] args) {
 		validate(4, args);
-		ArgsName argsName = ArgsName.of(args);
+		ArgumentsName argsName = ArgumentsName.of(args);
 		String directory = argsName.get("d");
 		String fileName = argsName.get("n");
 		String regularExp = argsName.get("t");

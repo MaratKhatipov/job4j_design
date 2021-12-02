@@ -26,13 +26,13 @@ public class SearchFiles {
 		Pattern pattern;
 		try {
 			Path start = Paths.get(String.valueOf(directory));
-			if (typeSearch.equals("name")) {
+			if ("name".equals(typeSearch)) {
 				list = Search.search(start, p -> p.toFile().getName().equals(searchFile));
-			} else if (typeSearch.equals("mask")) {
+			} else if ("mask".equals(typeSearch)) {
 				searchFile = searchMask();
 				pattern = Pattern.compile(searchFile);
 				list = Search.search(start, p -> p.toFile().getName().matches(pattern.toString()));
-			} else if (typeSearch.equals("regex")) {
+			} else if ("regex".equals(typeSearch)) {
 				pattern = Pattern.compile(searchFile);
 				list = Search.search(start, p -> p.toFile().getName().matches(pattern.toString()));
 			}
