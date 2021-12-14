@@ -1,7 +1,5 @@
 package ru.job4j.searchfiles;
 
-import ru.job4j.io.SearchFiles;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,7 +24,7 @@ public class Search {
 	}
 
 	public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
-		ru.job4j.io.SearchFiles searcher = new SearchFiles(condition);
+		SearchFiles searcher = new SearchFiles(condition);
 		Files.walkFileTree(root, searcher);
 		return searcher.getPaths();
 	}
