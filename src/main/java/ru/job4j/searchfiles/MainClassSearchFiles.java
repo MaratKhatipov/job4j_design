@@ -34,7 +34,7 @@ public class MainClassSearchFiles {
 				list = Search.search(start, p -> p.toFile().getName().matches(pattern.toString()));
 			} else if ("regex".equals(typeSearch)) {
 				pattern = Pattern.compile(searchFile);
-				list = Search.search(start, p -> p.toFile().getName().matches(pattern.toString()));
+				list = Search.search(start, p -> pattern.matcher(p.toFile().getName()).find());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
