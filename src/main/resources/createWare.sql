@@ -1,4 +1,4 @@
-create table avgGrade (
+create table avgGrade(
 id serial primary key,
 student_name varchar(255),
 course_number int,
