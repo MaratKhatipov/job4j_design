@@ -1,4 +1,4 @@
-package ru.job4j.sql;
+package ru.job4j.sql.jdbc;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
