@@ -50,7 +50,7 @@ public class TableEditor implements AutoCloseable {
      * @param tableName - название таблицы
      */
     public void createTable(String tableName) throws Exception {
-        String createTable = "create table if not exists %s (id serial primary key, name text)";
+        String createTable = "create table if not exists %s (id serial primary key)";
         execute(String.format(createTable, tableName), tableName);
     }
 
@@ -122,12 +122,13 @@ public class TableEditor implements AutoCloseable {
         Properties properties = new Properties();
         try (FileInputStream fis = new FileInputStream("./src/main/resources/app.properties")) {
             properties.load(fis);
-            TableEditor tableEditor = new TableEditor(properties);
-            tableEditor.createTable("for_example");
-            tableEditor.addColumn("for_example", "money", "int");
-            tableEditor.renameColumn("for_example", "money", "ruble");
-            tableEditor.dropColumn("for_example", "ruble");
-            tableEditor.dropTable("for_example");
+            try (TableEditor tableEditor = new TableEditor(properties)) {
+                tableEditor.createTable("for_example");
+                tableEditor.addColumn("for_example", "money", "int");
+                tableEditor.renameColumn("for_example", "money", "ruble");
+                tableEditor.dropColumn("for_example", "ruble");
+                tableEditor.dropTable("for_example");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
