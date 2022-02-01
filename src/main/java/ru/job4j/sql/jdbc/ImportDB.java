@@ -26,10 +26,8 @@ public class ImportDB {
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             rd.lines().forEach((n) -> {
                 String[] keyValue = n.split(";");
-                if (keyValue.length != 2) {
-                    throw new IllegalArgumentException("Меньше двух аргументов");
-                } else if (keyValue[0].isEmpty() || keyValue[1].isEmpty()) {
-                    throw new IllegalArgumentException("Однин из аргументов Пуст");
+                if (keyValue.length != 2 || keyValue[0].isEmpty() || keyValue[1].isEmpty()) {
+                    throw new IllegalArgumentException("Недостаточное количество аргументов");
                 }
                 users.add(new User(keyValue[0], keyValue[1]));
             });
