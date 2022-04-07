@@ -1,5 +1,6 @@
 package kiss;
 
+import ood.kiss.MaxMin;
 import org.junit.Test;
 
 import java.util.ArrayList;
