@@ -1,4 +1,4 @@
-package ood.tdd;
+package ru.job4j.tdd;
 
 import org.junit.Test;
 
