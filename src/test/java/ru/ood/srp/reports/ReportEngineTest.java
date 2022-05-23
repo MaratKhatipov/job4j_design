@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
+import static ru.ood.srp.reports.ReportEngineAccounting.AMD;
 
 public class ReportEngineTest {
 
@@ -18,13 +19,15 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new ReportEngine(store);
-        String expect = "Name; Hired; Fired; Salary;"
-                + newLine
-                + worker.getName() + ";"
-                + worker.getHired() + ";"
-                + worker.getFired() + ";"
-                + worker.getSalary() + ";" + newLine;
-        assertThat(engine.generate(em -> true), is(expect));
+        StringBuilder expect = new StringBuilder()
+                .append("Name; Hired; Fired; Salary;")
+                .append(newLine)
+                .append(worker.getName()).append(";")
+                .append(worker.getHired()).append(";")
+                .append(worker.getFired()).append(";")
+                .append(worker.getSalary()).append(";")
+                .append(newLine);
+        assertThat(engine.generate(em -> true), is(expect.toString()));
     }
 
     @Test
@@ -34,32 +37,29 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new ReportEngineDev(store);
-        String expect = "<!DOCTYPE html>" + newLine
-                + "<html>" + newLine
-                + "<header>" + newLine
-                + "</header>" + newLine
-                + "<body>" + newLine
-                + "<table border = \"1\">" + newLine
-                + "<tr>" + newLine
-                + "<th>Name</th>" + newLine
-                + "<th>Hired</th>" + newLine
-                + "<th>Fired</th>" + newLine
-                + "<th>Salary</th>" + newLine
-                + "</tr>" + newLine
-                + "<tr>" + newLine
-                + "<td>" + worker.getName() + "</td>"
-                + newLine
-                + "<td>" + worker.getHired() + "</td>"
-                + newLine
-                + "<td>" + worker.getFired() + "</td>"
-                + newLine
-                + "<td>" + worker.getSalary() + "</td>"
-                + newLine
-                + "</tr>" + newLine
-                + "</table>" + newLine
-                + "</body>" + newLine
-                + "</html>" + newLine;
-        assertThat(engine.generate(em -> true), is(expect));
+        StringBuilder expect = new StringBuilder()
+                .append("<!DOCTYPE html>").append(newLine)
+                .append("<html>").append(newLine)
+                .append("<header>").append(newLine)
+                .append("</header>").append(newLine)
+                .append("<body>").append(newLine)
+                .append("<table border = \"1\">").append(newLine)
+                .append("<tr>").append(newLine)
+                .append("<th>Name</th>").append(newLine)
+                .append("<th>Hired</th>").append(newLine)
+                .append("<th>Fired</th>").append(newLine)
+                .append("<th>Salary</th>").append(newLine)
+                .append("</tr>").append(newLine)
+                .append("<tr>").append(newLine)
+                .append("<td>").append(worker.getName()).append("</td>").append(newLine)
+                .append("<td>").append(worker.getHired()).append("</td>").append(newLine)
+                .append("<td>").append(worker.getFired()).append("</td>").append(newLine)
+                .append("<td>").append(worker.getSalary()).append("</td>").append(newLine)
+                .append("</tr>").append(newLine)
+                .append("</table>").append(newLine)
+                .append("</body>").append(newLine)
+                .append("</html>").append(newLine);
+        assertThat(engine.generate(em -> true), is(expect.toString()));
     }
 
     @Test
@@ -69,12 +69,15 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new ReportEngineAccounting(store);
-        String expect = "Name; Hired; Fired; Salary;" + newLine
-                + worker.getName() + ";"
-                + worker.getHired() + ";"
-                + worker.getFired() + ";"
-                + worker.getSalary() * 7.36 + ";" + newLine;
-        assertThat(engine.generate(em -> true), is(expect));
+        StringBuilder expect = new StringBuilder()
+                .append("Name; Hired; Fired; Salary;")
+                .append(newLine)
+                .append(worker.getName()).append(";")
+                .append(worker.getHired()).append(";")
+                .append(worker.getFired()).append(";")
+                .append(worker.getSalary() * AMD).append(";")
+                .append(newLine);
+        assertThat(engine.generate(em -> true), is(expect.toString()));
     }
 
     @Test
@@ -88,16 +91,17 @@ public class ReportEngineTest {
         store.add(secondWorker);
         store.add(thirdWorker);
         Report engine = new ReportEngineHR(store);
-        String expected = "Name; Salary;" + newLine
-                + secondWorker.getName() + ";"
-                + secondWorker.getSalary() + ";"
-                + newLine
-                + firstWorker.getName() + ";"
-                + firstWorker.getSalary() + ";"
-                + newLine
-                + thirdWorker.getName() + ";"
-                + thirdWorker.getSalary() + ";"
-                + newLine;
-        assertThat(engine.generate((em -> true)), is(expected));
+        StringBuilder expected = new StringBuilder()
+                .append("Name; Salary;").append(newLine)
+                .append(secondWorker.getName()).append(";")
+                .append(secondWorker.getSalary()).append(";")
+                .append(newLine)
+                .append(firstWorker.getName()).append(";")
+                .append(firstWorker.getSalary()).append(";")
+                .append(newLine)
+                .append(thirdWorker.getName()).append(";")
+                .append(thirdWorker.getSalary()).append(";")
+                .append(newLine);
+        assertThat(engine.generate((em -> true)), is(expected.toString()));
     }
 }

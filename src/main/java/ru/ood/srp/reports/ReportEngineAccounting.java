@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 
 public class ReportEngineAccounting extends ReportEngine {
 
-    final double amd = 7.36;
+    public static final double AMD = 7.36;
 
     private final String newLine = System.lineSeparator();
 
@@ -25,7 +25,7 @@ public class ReportEngineAccounting extends ReportEngine {
             text.append(employee.getName()).append(";")
                     .append(employee.getHired()).append(";")
                     .append(employee.getFired()).append(";")
-                    .append(employee.getSalary() * 7.36).append(";")
+                    .append(employee.getSalary() * AMD).append(";")
                     .append(newLine);
         }
     }

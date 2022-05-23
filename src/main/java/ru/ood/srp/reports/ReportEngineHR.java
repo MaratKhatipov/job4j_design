@@ -1,5 +1,6 @@
 package ru.ood.srp.reports;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -21,7 +22,7 @@ public class ReportEngineHR extends ReportEngine {
 
     private void createBody(Predicate<Employee> filter, StringBuilder text) {
         List<Employee> employeeList = store.findBy(filter);
-        employeeList.sort((x, y) -> (int) ((y.getSalary()) - (x.getSalary())));
+        employeeList.sort(Comparator.comparingDouble(Employee::getSalary).reversed());
         for (Employee employee : employeeList) {
             text.append(employee.getName()).append(";")
                     .append(employee.getSalary()).append(";")
