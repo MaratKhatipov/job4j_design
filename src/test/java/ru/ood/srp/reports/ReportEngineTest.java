@@ -2,7 +2,11 @@ package ru.ood.srp.reports;
 
 import org.junit.Test;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -103,5 +107,54 @@ public class ReportEngineTest {
                 .append(thirdWorker.getSalary()).append(";")
                 .append(newLine);
         assertThat(engine.generate((em -> true)), is(expected.toString()));
+    }
+
+    @Test
+    public void whenReportConvertXML() throws DatatypeConfigurationException {
+        MemStore store = new MemStore();
+        GregorianCalendar now = new GregorianCalendar();
+        XMLGregorianCalendar convertDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(now);
+        Employee worker = new Employee("Ivan", now, now, 100);
+        store.add(worker);
+        Report engine = new ReportEngineXML(store);
+        StringBuilder expected = new StringBuilder();
+                expected.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>").append("\n")
+                .append("<Employees>" + "\n")
+                .append("    <employees>").append("\n")
+                .append("        <fired>").append(convertDate).append("</fired>").append("\n")
+                .append("        <hired>")
+                .append(convertDate)
+                .append("</hired>").append("\n")
+                .append("        <name>")
+                .append(worker.getName())
+                .append("</name>").append("\n")
+                .append("        <salary>")
+                .append(worker.getSalary())
+                .append("</salary>").append("\n")
+                .append("    </employees>").append("\n")
+                .append("</Employees>").append("\n");
+        System.out.println(engine.generate(em -> true));
+        assertThat((engine.generate(employee -> true)), is(expected.toString()));
+
+    }
+
+    @Test
+    public void whenReportConvertJSON() throws DatatypeConfigurationException {
+        MemStore store = new MemStore();
+        Calendar now = new GregorianCalendar(2022, Calendar.MAY, 24);
+        Employee worker = new Employee("Ivan", now, now, 100);
+        store.add(worker);
+        Report engine = new ReportEngineJSON(store);
+        StringBuilder expect = new StringBuilder();
+        expect
+                .append("{\"employees\":["
+                        + "{\"name\":\"Ivan\""
+                        + ",\"hired\":{"
+                        + "\"year\":2022,\"month\":4,\"dayOfMonth\":24,\"hourOfDay\":0,\"minute\":0,\"second\":0}"
+                        + ",\"fired\":{"
+                        + "\"year\":2022,\"month\":4,\"dayOfMonth\":24,\"hourOfDay\":0,\"minute\":0,\"second\":0}"
+                        + ",\"salary\":100.0}]}");
+        System.out.println(engine.generate(employee -> true));
+        assertThat(engine.generate(employee -> true), is(expect.toString()));
     }
 }
