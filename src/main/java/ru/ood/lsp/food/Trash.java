@@ -8,11 +8,12 @@ public class Trash implements Store {
     private final List<Food> foods = new ArrayList<>();
 
     @Override
-    public void add(Food food) {
+    public boolean add(Food food) {
         boolean res = accept(food);
         if (res) {
             foods.add(food);
         }
+        return res;
     }
 
     @Override

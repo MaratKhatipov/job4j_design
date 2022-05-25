@@ -3,7 +3,6 @@ package ru.ood.lsp.food;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
@@ -11,23 +10,23 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class ControlQualityTest {
-    LocalDate expiryDateMilk = LocalDate.of(2022, Month.MAY, 29);
-    LocalDate createDateMilk = LocalDate.of(2022, Month.APRIL, 18);
-    Food milk = new Milk("Prostokvashino", expiryDateMilk, createDateMilk, 86.4, 0.5);
+    private final LocalDate expiryDateMilk = LocalDate.now().plusDays(4);
+    private final LocalDate createDateMilk = LocalDate.now().minusDays(37);
+    private final Food milk = new Milk("Prostokvashino", expiryDateMilk, createDateMilk, 86.4, 0.5);
 
-    LocalDate expiryDatePasta = LocalDate.of(2022, Month.JUNE, 24);
-    LocalDate createDatePasta = LocalDate.of(2022, Month.MAY, 24);
-    Food pasta = new Pasta("Barilla", expiryDatePasta, createDatePasta, 150, 0.2);
+    private final LocalDate expiryDatePasta = LocalDate.now().plusDays(30);
+    private final LocalDate createDatePasta = LocalDate.now().minusDays(1);
+    private final Food pasta = new Pasta("Barilla", expiryDatePasta, createDatePasta, 150, 0.2);
 
-    LocalDate expiryDateBread = LocalDate.of(2022, Month.MAY, 25);
-    LocalDate createDateBread = LocalDate.of(2022, Month.MAY, 22);
-    Food baton = new Bread("Podmoskownyi", expiryDateBread, createDateBread, 46, 0.1);
+    private final LocalDate expiryDateBread = LocalDate.now();
+    private final LocalDate createDateBread = LocalDate.now().minusDays(2);
+    private final Food baton = new Bread("Podmoskownyi", expiryDateBread, createDateBread, 46, 0.1);
 
-    Store warehouse = new Warehouse();
-    Store trash = new Trash();
-    Store shop = new Shop();
-    List<Store> storeList = List.of(warehouse, trash, shop);
-    ControlQuality controlQuality = new ControlQuality(storeList);
+    private final Store warehouse = new Warehouse();
+    private final Store trash = new Trash();
+    private final Store shop = new Shop();
+    private final List<Store> storeList = List.of(warehouse, trash, shop);
+    private final ControlQuality controlQuality = new ControlQuality(storeList);
 
     @Test
     public void whenProductSentToShopAndGetDiscount() {

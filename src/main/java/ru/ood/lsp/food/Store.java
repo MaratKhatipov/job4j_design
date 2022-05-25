@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface Store {
-    void add(Food food);
+    boolean add(Food food);
 
     boolean accept(Food food);
 

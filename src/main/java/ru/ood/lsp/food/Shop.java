@@ -11,7 +11,7 @@ public class Shop implements Store {
     private final List<Food> foods = new ArrayList<>();
 
     @Override
-    public void add(Food food) {
+    public boolean add(Food food) {
         boolean result = accept(food);
         double percents =  getCondition(food);
         if (result) {
@@ -20,6 +20,7 @@ public class Shop implements Store {
             }
             foods.add(food);
         }
+        return result;
     }
 
     @Override
