@@ -2,10 +2,10 @@ package ru.ood.lsp.parking;
 
 public class PassengerCarCarImpl implements Car {
 
-    private final int size;
+    public final static int SIZE = 1;
 
     public PassengerCarCarImpl() {
-        this.size = 1;
+        int size = SIZE;
     }
 
     /**
@@ -13,6 +13,6 @@ public class PassengerCarCarImpl implements Car {
      */
     @Override
     public int getCarSize() {
-        return 0;
+        return SIZE;
     }
 }

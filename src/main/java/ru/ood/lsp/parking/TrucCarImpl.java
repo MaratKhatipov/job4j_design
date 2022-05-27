@@ -12,6 +12,6 @@ public class TrucCarImpl implements Car {
      */
     @Override
     public int getCarSize() {
-        return 0;
+        return this.size;
     }
 }

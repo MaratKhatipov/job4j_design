@@ -1,20 +1,19 @@
 package ru.ood.lsp.parking;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 public class CarAndTruckParkingImplTest {
-    @Ignore
+
     @Test
     public void whenPassCarParkedThenTrue() {
         Car passCar = new PassengerCarCarImpl();
         Parking parking = new CarAndTruckParkingImpl(4, 0);
         assertTrue(parking.carSuccessfullyParked(passCar));
     }
-    @Ignore
+
     @Test
     public void whenTruckParkedThenTrue() {
         Car truck = new TrucCarImpl(2);
@@ -22,7 +21,6 @@ public class CarAndTruckParkingImplTest {
         assertTrue(parking.carSuccessfullyParked(truck));
     }
 
-    @Ignore
     @Test
     public void whenCarAndTruckParkingTHenTrue() {
         Car passCar = new PassengerCarCarImpl();
@@ -32,7 +30,6 @@ public class CarAndTruckParkingImplTest {
                 && parking.carSuccessfullyParked(truck));
     }
 
-    @Ignore
     @Test
     public void whenTruckParkedPassCarPlaceThenTrue() {
         Car truck = new TrucCarImpl(2);
@@ -40,7 +37,6 @@ public class CarAndTruckParkingImplTest {
         assertTrue(parking.carSuccessfullyParked(truck));
     }
 
-    @Ignore
     @Test
     public void whenNotCarPassSpaceThenFalse() {
         Car passCar = new PassengerCarCarImpl();
@@ -48,7 +44,6 @@ public class CarAndTruckParkingImplTest {
         assertFalse(parking.carSuccessfullyParked(passCar));
     }
 
-    @Ignore
     @Test
     public void whenNotTruckSpaceThenFalse() {
         Car truck = new TrucCarImpl(7);
@@ -56,7 +51,6 @@ public class CarAndTruckParkingImplTest {
         assertFalse(parking.carFinishParked(truck));
     }
 
-    @Ignore
     @Test
     public void whenCheckTotalFreeSpaceIs4() {
         Parking parking = new CarAndTruckParkingImpl(4, 4);
@@ -67,7 +61,6 @@ public class CarAndTruckParkingImplTest {
         assertThat(parking.countFreeSpace(), is(4));
     }
 
-    @Ignore
     @Test
     public void whenAllPlaceOccupiedThenFalse() {
         Parking parking = new CarAndTruckParkingImpl(2, 2);
@@ -78,7 +71,6 @@ public class CarAndTruckParkingImplTest {
         assertFalse(parking.checkFreeSpace());
     }
 
-    @Ignore
     @Test
     public void whenAllPlaceOccupiedButCarHasLeftThenTrue() {
         Parking parking = new CarAndTruckParkingImpl(1, 1);
