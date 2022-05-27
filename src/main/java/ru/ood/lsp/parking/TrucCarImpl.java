@@ -1,6 +1,7 @@
 package ru.ood.lsp.parking;
 
 public class TrucCarImpl implements Car {
+
     private final int size;
 
     public TrucCarImpl(int size) {

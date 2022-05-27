@@ -65,10 +65,15 @@ public class CarAndTruckParkingImplTest {
     public void whenAllPlaceOccupiedThenFalse() {
         Parking parking = new CarAndTruckParkingImpl(2, 2);
         parking.carSuccessfullyParked(new PassengerCarCarImpl());
+        assertTrue(parking.checkFreeSpace());
         parking.carSuccessfullyParked(new PassengerCarCarImpl());
+        assertTrue(parking.checkFreeSpace());
         parking.carSuccessfullyParked(new TrucCarImpl(2));
+        assertTrue(parking.checkFreeSpace());
         parking.carSuccessfullyParked(new TrucCarImpl(2));
+        assertFalse(parking.carSuccessfullyParked(new TrucCarImpl(2)));
         assertFalse(parking.checkFreeSpace());
+
     }
 
     @Test

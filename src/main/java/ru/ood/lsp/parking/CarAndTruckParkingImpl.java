@@ -3,18 +3,17 @@ package ru.ood.lsp.parking;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ru.ood.lsp.parking.Car.SIZE;
+
 public class CarAndTruckParkingImpl implements Parking {
 
     private int freeSpacePassCar;
     private int freeSpaceTruck;
-    private int occupiedSpace;
-    private int totalSpace;
-    List<Car> carStorage = new ArrayList<>();
+    private final List<Car> carStorage = new ArrayList<>();
 
     public CarAndTruckParkingImpl(int freeSpacePassCar, int freeSpaceTruck) {
         this.freeSpacePassCar = freeSpacePassCar;
         this.freeSpaceTruck = freeSpaceTruck;
-        this.totalSpace = freeSpacePassCar + freeSpaceTruck;
     }
 
     /**
@@ -24,29 +23,17 @@ public class CarAndTruckParkingImpl implements Parking {
     @Override
     public boolean carSuccessfullyParked(Car car) {
         boolean res = false;
-        if (car.getCarSize() == 1 && freeSpacePassCar > 0) {
+        if (car.getCarSize() == SIZE && freeSpacePassCar >= 1) {
             freeSpacePassCar--;
-            increaseOccupiedPlaces();
             res = carStorage.add(car);
-        } else if (car.getCarSize() > 1 && freeSpaceTruck > 0) {
+        } else if (car.getCarSize() > SIZE && freeSpaceTruck >= 1) {
             freeSpaceTruck--;
-            increaseOccupiedPlaces();
             res = carStorage.add(car);
         } else if (car.getCarSize() <= freeSpacePassCar) {
             freeSpacePassCar -= car.getCarSize();
-            increaseOccupiedPlaces();
             res = carStorage.add(car);
         }
         return res;
-    }
-
-    /**
-     * внутренний метод для увеличения знятых мест
-     * и уменьшения свободных
-     */
-    private void increaseOccupiedPlaces() {
-        totalSpace--;
-        occupiedSpace++;
     }
 
     /**
@@ -57,11 +44,9 @@ public class CarAndTruckParkingImpl implements Parking {
     public boolean carFinishParked(Car car) {
         boolean finished = false;
         if (carStorage.remove(car)) {
-            if (car.getCarSize() == 1) {
-                increaseInVacancies();
+            if (car.getCarSize() == SIZE) {
                 freeSpacePassCar++;
-            } else if (car.getCarSize() > 1) {
-                increaseInVacancies();
+            } else if (car.getCarSize() > SIZE) {
                 freeSpaceTruck++;
             }
         }
@@ -69,33 +54,22 @@ public class CarAndTruckParkingImpl implements Parking {
     }
 
     /**
-     * внутренний метод для увеличения свободных мест
-     * и уменьшения занятых
-     */
-    private void increaseInVacancies() {
-        totalSpace++;
-        occupiedSpace--;
-    }
-
-    /**
      * метод подсчитывает общее колличество свободных мест
-     *
      * @return возвращает общее колличество свободных мест
      */
     @Override
     public int countFreeSpace() {
         System.out.println("freeSpacePassCar = " + freeSpacePassCar
                 + "; freeSpaceTruck = " + freeSpaceTruck);
-        return totalSpace;
+        return freeSpacePassCar + freeSpaceTruck;
     }
 
     /**
      * меод проверяет есть ли свободные места
-     *
      * @return - true, если есть свободные места
      */
     @Override
     public boolean checkFreeSpace() {
-        return occupiedSpace < totalSpace;
+        return (freeSpacePassCar + freeSpaceTruck) > 0;
     }
 }
