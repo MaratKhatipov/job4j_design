@@ -1,15 +1,18 @@
 package ru.ood.lsp.parking;
 
 public class PassengerCarCarImpl implements Car {
-    private int size;
-    private int id;
-    @Override
-    public int getCarSize() {
-        return 0;
+
+    private final int size;
+
+    public PassengerCarCarImpl() {
+        this.size = 1;
     }
 
+    /**
+     * @return возвращает размер автомобиля
+     */
     @Override
-    public int getCarNumber() {
+    public int getCarSize() {
         return 0;
     }
 }

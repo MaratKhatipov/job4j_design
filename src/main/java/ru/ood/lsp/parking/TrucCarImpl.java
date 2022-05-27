@@ -1,15 +1,17 @@
 package ru.ood.lsp.parking;
 
 public class TrucCarImpl implements Car {
-    private int size;
-    private int id;
-    @Override
-    public int getCarSize() {
-        return 0;
+    private final int size;
+
+    public TrucCarImpl(int size) {
+        this.size = size;
     }
 
+    /**
+     * @return возвращает размер автомобиля
+     */
     @Override
-    public int getCarNumber() {
+    public int getCarSize() {
         return 0;
     }
 }

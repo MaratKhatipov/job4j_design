@@ -9,7 +9,6 @@ public interface Parking {
     boolean carSuccessfullyParked(Car car);
 
     /**
-     *
      * @param car - тип автомобиля
      * @return - true, если автомобиль успешно удалился с парковки
      */
