@@ -8,7 +8,6 @@ import static org.junit.Assert.*;
 
 public class CarAndTruckParkingImplTest {
 
-    @Ignore
     @Test
     public void whenPassCarParkedThenTrue() {
         Car passCar = new PassengerCarCarImpl();
@@ -16,7 +15,6 @@ public class CarAndTruckParkingImplTest {
         assertTrue(parking.carSuccessfullyParked(passCar));
     }
 
-    @Ignore
     @Test
     public void whenTruckParkedThenTrue() {
         Car truck = new TrucCarImpl(2);
