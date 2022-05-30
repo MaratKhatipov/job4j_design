@@ -3,8 +3,6 @@ package ru.ood.lsp.parking;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.ood.lsp.parking.Car.SIZE;
-
 public class CarAndTruckParkingImpl implements Parking {
 
     private int freeSpacePassCar;
@@ -23,10 +21,10 @@ public class CarAndTruckParkingImpl implements Parking {
     @Override
     public boolean carSuccessfullyParked(Car car) {
         boolean res = false;
-        if (car.getCarSize() == SIZE && freeSpacePassCar >= 1) {
+        if (car.getCarSize() == PassengerCarCarImpl.SIZE && freeSpacePassCar >= PassengerCarCarImpl.SIZE) {
             freeSpacePassCar--;
             res = carStorage.add(car);
-        } else if (car.getCarSize() > SIZE && freeSpaceTruck >= 1) {
+        } else if (car.getCarSize() > PassengerCarCarImpl.SIZE && freeSpaceTruck >= PassengerCarCarImpl.SIZE) {
             freeSpaceTruck--;
             res = carStorage.add(car);
         } else if (car.getCarSize() <= freeSpacePassCar) {
@@ -44,9 +42,9 @@ public class CarAndTruckParkingImpl implements Parking {
     public boolean carFinishParked(Car car) {
         boolean finished = false;
         if (carStorage.remove(car)) {
-            if (car.getCarSize() == SIZE) {
+            if (car.getCarSize() == PassengerCarCarImpl.SIZE) {
                 freeSpacePassCar++;
-            } else if (car.getCarSize() > SIZE) {
+            } else if (car.getCarSize() > PassengerCarCarImpl.SIZE) {
                 freeSpaceTruck++;
             }
         }
