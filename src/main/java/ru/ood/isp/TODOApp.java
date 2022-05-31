@@ -12,7 +12,6 @@ public class TODOApp {
         menu.add("Купить продукты", "Купить молоко", STUB_ACTION);
         menu.select("Купить хлеб");
         MenuPrinter printer = new Printer();
-        //printer.print(menu);
-        System.out.println(menu.select("Сходить в магазин"));
+        printer.print(menu);
     }
 }

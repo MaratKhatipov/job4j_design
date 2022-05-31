@@ -78,4 +78,5 @@ public class SimpleMenuTest {
         printer.print(menu);
         assertThat(expected, is(byteArrayOutputStream.toString()));
     }
+
 }

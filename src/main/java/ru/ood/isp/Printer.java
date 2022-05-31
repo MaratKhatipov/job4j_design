@@ -3,6 +3,7 @@ package ru.ood.isp;
 import static java.lang.System.out;
 
 public class Printer implements MenuPrinter {
+
     @Override
     public void print(Menu menu) {
         for (Menu.MenuItemInfo i : menu) {
@@ -14,5 +15,7 @@ public class Printer implements MenuPrinter {
                 out.println(" " + i.getNumber() + i.getName());
             }
         }
+
     }
+
 }

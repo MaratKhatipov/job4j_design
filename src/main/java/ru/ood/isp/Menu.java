@@ -1,12 +1,12 @@
 package ru.ood.isp;
 
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public interface Menu extends Iterable<Menu.MenuItemInfo> {
-
     String ROOT = null;
 
     boolean add(String parentName, String childName, ActionDelegate actionDelegate);

@@ -27,9 +27,8 @@ public class SimpleMenu implements Menu {
         }
         return result;
     }
-/*
-На основе метода findItem() реализуйте методы add() и select().
- */
+
+
     @Override
     public Optional<MenuItemInfo> select(String itemName) {
         Optional<ItemInfo> info = findItem(itemName);
