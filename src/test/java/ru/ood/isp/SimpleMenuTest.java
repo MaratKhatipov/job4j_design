@@ -13,10 +13,6 @@ import static org.junit.Assert.assertThat;
 public class SimpleMenuTest {
     public static final ActionDelegate STUB_ACTION = System.out::println;
 
-    private static void delegate() {
-        int count = 0;
-        count++;
-    }
 
     @Test
     public void whenAddThenReturnSame() {

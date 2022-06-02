@@ -73,8 +73,6 @@ public interface Menu extends Iterable<Menu.MenuItemInfo> {
         public String toString() {
             return "MenuItemInfo{"
                     + "name='" + name + '\''
-                    + ", children=" + children
-                    + ", actionDelegate=" + actionDelegate
                     + ", number='" + number + '\''
                     + '}';
         }
