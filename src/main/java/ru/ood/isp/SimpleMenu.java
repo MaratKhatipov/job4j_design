@@ -33,7 +33,7 @@ public class SimpleMenu implements Menu {
     public Optional<MenuItemInfo> select(String itemName) {
         Optional<ItemInfo> info = findItem(itemName);
         ItemInfo itemInfo = info.get();
-        return findItem(itemName).map(i -> new MenuItemInfo(itemInfo.menuItem, itemInfo.number));
+        return info.map(i -> new MenuItemInfo(itemInfo.menuItem, itemInfo.number));
     }
 
 

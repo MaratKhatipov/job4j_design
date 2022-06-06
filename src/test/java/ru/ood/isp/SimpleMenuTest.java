@@ -66,13 +66,13 @@ public class SimpleMenuTest {
         menu.add("Купить продукты", "Купить хлеб", STUB_ACTION);
         menu.add("Купить продукты", "Купить молоко", STUB_ACTION);
         MenuPrinter printer = new Printer();
-        String expected = "1.Сходить в магазин" + System.lineSeparator()
-                + "---- 1.1.Купить продукты" + System.lineSeparator()
-                + "-------- 1.1.1.Купить хлеб" + System.lineSeparator()
-                + "-------- 1.1.2.Купить молоко" + System.lineSeparator()
-                + "2.Покормить собаку" + System.lineSeparator();
+        StringBuilder expected = new StringBuilder();
+        expected.append("1.Сходить в магазин").append(System.lineSeparator())
+                .append("---- 1.1.Купить продукты").append(System.lineSeparator())
+                .append("-------- 1.1.1.Купить хлеб").append(System.lineSeparator())
+                .append("-------- 1.1.2.Купить молоко").append(System.lineSeparator())
+                .append("2.Покормить собаку").append(System.lineSeparator());
         printer.print(menu);
-        assertThat(expected, is(byteArrayOutputStream.toString()));
+        assertThat(expected.toString(), is(byteArrayOutputStream.toString()));
     }
-
 }
